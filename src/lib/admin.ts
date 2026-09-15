@@ -4,7 +4,7 @@ export function validSecret(value: string) {
   const secret = process.env.DASH_SECRET;
   return (
     !!secret &&
-    secret.length >= 5 &&
+    secret.length >= 4 &&
     timingSafeEqual(
       createHash("sha256").update(value).digest(),
       createHash("sha256").update(secret).digest(),
