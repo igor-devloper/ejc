@@ -1,5 +1,31 @@
 // use prisma-8
 
+model ShopSettings {
+  id String @id
+  short Int
+  long Int
+  pixRate Int
+  cardRate Int
+}
+
+model ShirtOrder {
+  id String @id
+  email String
+  customer String
+  phone String
+  items String
+  total Int
+  method String
+  status String
+  paymentId String?
+  createdAt TimestamptzString @default(now())
+}
+
+model ShirtNumber {
+  number Int @id
+  orderId String
+}
+
 model User {
   id        Int      @id @default(autoincrement())
   email     String   @unique

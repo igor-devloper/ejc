@@ -1,0 +1,41 @@
+[
+  {
+    "id": "table.shopSettings",
+    "label": "Create table \"shopSettings\"",
+    "summary": "Creates table \"shopSettings\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "shopSettings"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"shopSettings\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"shopSettings\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"shopSettings\"",
+        "sql": "CREATE TABLE \"public\".\"shopSettings\" (\n  \"cardRate\" int4 NOT NULL,\n  \"id\" text NOT NULL,\n  \"long\" int4 NOT NULL,\n  \"pixRate\" int4 NOT NULL,\n  \"short\" int4 NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"shopSettings\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"shopSettings\""
+        ]
+      }
+    ]
+  }
+]

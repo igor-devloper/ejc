@@ -34,7 +34,7 @@ import type {
 } from '@prisma/orm-postgres/contract/types';
 
 export type StorageHash =
-  StorageHashBase<'da8165b4fcb2e8ad722df7c90fa8739ae0f20256eb46c09e7df6b4b4dac9d911'>;
+  StorageHashBase<'48ace520b3ef7350419b8af2d596d0d58a49bc112d89ab93cc5a09a7e4a0cb9b'>;
 export type ExecutionHash =
   ExecutionHashBase<'4abff323cc88151ef9c9a0ec90122cfee6d46814a118cdb66a9fdd94a4123463'>;
 export type ProfileHash =
@@ -266,13 +266,6 @@ export type FieldOutputTypes = {
       readonly paymentId: CodecTypes['pg/text@1']['output'] | null;
       readonly createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
     };
-    readonly ShopSettings: {
-      readonly id: CodecTypes['pg/text@1']['output'];
-      readonly short: CodecTypes['pg/int4@1']['output'];
-      readonly long: CodecTypes['pg/int4@1']['output'];
-      readonly pixRate: CodecTypes['pg/int4@1']['output'];
-      readonly cardRate: CodecTypes['pg/int4@1']['output'];
-    };
     readonly User: {
       readonly id: CodecTypes['pg/int4@1']['output'];
       readonly email: CodecTypes['pg/text@1']['output'];
@@ -308,13 +301,6 @@ export type FieldInputTypes = {
       readonly status: CodecTypes['pg/text@1']['input'];
       readonly paymentId: CodecTypes['pg/text@1']['input'] | null;
       readonly createdAt: CodecTypes['pg/timestamptz-string@1']['input'];
-    };
-    readonly ShopSettings: {
-      readonly id: CodecTypes['pg/text@1']['input'];
-      readonly short: CodecTypes['pg/int4@1']['input'];
-      readonly long: CodecTypes['pg/int4@1']['input'];
-      readonly pixRate: CodecTypes['pg/int4@1']['input'];
-      readonly cardRate: CodecTypes['pg/int4@1']['input'];
     };
     readonly User: {
       readonly id: CodecTypes['pg/int4@1']['input'];
@@ -352,13 +338,6 @@ export type StorageColumnTypes = {
       readonly status: CodecTypes['pg/text@1']['output'];
       readonly total: CodecTypes['pg/int4@1']['output'];
     };
-    readonly shopSettings: {
-      readonly cardRate: CodecTypes['pg/int4@1']['output'];
-      readonly id: CodecTypes['pg/text@1']['output'];
-      readonly long: CodecTypes['pg/int4@1']['output'];
-      readonly pixRate: CodecTypes['pg/int4@1']['output'];
-      readonly short: CodecTypes['pg/int4@1']['output'];
-    };
     readonly user: {
       readonly createdAt: CodecTypes['pg/timestamptz-string@1']['output'];
       readonly email: CodecTypes['pg/text@1']['output'];
@@ -395,13 +374,6 @@ export type StorageColumnInputTypes = {
       readonly status: CodecTypes['pg/text@1']['input'];
       readonly total: CodecTypes['pg/int4@1']['input'];
     };
-    readonly shopSettings: {
-      readonly cardRate: CodecTypes['pg/int4@1']['input'];
-      readonly id: CodecTypes['pg/text@1']['input'];
-      readonly long: CodecTypes['pg/int4@1']['input'];
-      readonly pixRate: CodecTypes['pg/int4@1']['input'];
-      readonly short: CodecTypes['pg/int4@1']['input'];
-    };
     readonly user: {
       readonly createdAt: CodecTypes['pg/timestamptz-string@1']['input'];
       readonly email: CodecTypes['pg/text@1']['input'];
@@ -414,14 +386,6 @@ export type StorageColumnInputTypes = {
 };
 
 export namespace Models {
-  export type public_ShopSettings = {
-    id: CodecTypes['pg/text@1']['output'];
-    short: CodecTypes['pg/int4@1']['output'];
-    long: CodecTypes['pg/int4@1']['output'];
-    pixRate: CodecTypes['pg/int4@1']['output'];
-    cardRate: CodecTypes['pg/int4@1']['output'];
-    readonly [RelationKeys]?: never;
-  };
   export type public_ShirtOrder = {
     id: CodecTypes['pg/text@1']['output'];
     email: CodecTypes['pg/text@1']['output'];
@@ -464,7 +428,6 @@ export namespace Models {
 
 export declare const models: {
   public: {
-    ShopSettings: Models.public_ShopSettings;
     ShirtOrder: Models.public_ShirtOrder;
     ShirtNumber: Models.public_ShirtNumber;
     User: Models.public_User;
@@ -630,39 +593,6 @@ type ContractBase = Omit<
               indexes: readonly [];
               foreignKeys: readonly [];
             };
-            readonly shopSettings: {
-              columns: {
-                readonly id: {
-                  readonly nativeType: 'text';
-                  readonly codecId: 'pg/text@1';
-                  readonly nullable: false;
-                };
-                readonly short: {
-                  readonly nativeType: 'int4';
-                  readonly codecId: 'pg/int4@1';
-                  readonly nullable: false;
-                };
-                readonly long: {
-                  readonly nativeType: 'int4';
-                  readonly codecId: 'pg/int4@1';
-                  readonly nullable: false;
-                };
-                readonly pixRate: {
-                  readonly nativeType: 'int4';
-                  readonly codecId: 'pg/int4@1';
-                  readonly nullable: false;
-                };
-                readonly cardRate: {
-                  readonly nativeType: 'int4';
-                  readonly codecId: 'pg/int4@1';
-                  readonly nullable: false;
-                };
-              };
-              primaryKey: { readonly columns: readonly ['id'] };
-              uniques: readonly [];
-              indexes: readonly [];
-              foreignKeys: readonly [];
-            };
             readonly user: {
               columns: {
                 readonly id: {
@@ -717,10 +647,6 @@ type ContractBase = Omit<
   readonly target: 'postgres';
   readonly targetFamily: 'sql';
   readonly roots: {
-    readonly shopSettings: {
-      readonly namespace: 'public' & NamespaceId;
-      readonly model: 'ShopSettings';
-    };
     readonly shirtOrder: {
       readonly namespace: 'public' & NamespaceId;
       readonly model: 'ShirtOrder';
@@ -875,42 +801,6 @@ type ContractBase = Omit<
                 readonly status: { readonly column: 'status' };
                 readonly paymentId: { readonly column: 'paymentId' };
                 readonly createdAt: { readonly column: 'createdAt' };
-              };
-            };
-          };
-          readonly ShopSettings: {
-            readonly fields: {
-              readonly id: {
-                readonly nullable: false;
-                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
-              };
-              readonly short: {
-                readonly nullable: false;
-                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
-              };
-              readonly long: {
-                readonly nullable: false;
-                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
-              };
-              readonly pixRate: {
-                readonly nullable: false;
-                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
-              };
-              readonly cardRate: {
-                readonly nullable: false;
-                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
-              };
-            };
-            readonly relations: Record<string, never>;
-            readonly storage: {
-              readonly table: 'shopSettings';
-              readonly namespaceId: 'public';
-              readonly fields: {
-                readonly id: { readonly column: 'id' };
-                readonly short: { readonly column: 'short' };
-                readonly long: { readonly column: 'long' };
-                readonly pixRate: { readonly column: 'pixRate' };
-                readonly cardRate: { readonly column: 'cardRate' };
               };
             };
           };

@@ -1,0 +1,80 @@
+[
+  {
+    "id": "table.shirtNumber",
+    "label": "Create table \"shirtNumber\"",
+    "summary": "Creates table \"shirtNumber\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "shirtNumber"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"shirtNumber\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"shirtNumber\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"shirtNumber\"",
+        "sql": "CREATE TABLE \"public\".\"shirtNumber\" (\n  \"number\" int4 NOT NULL,\n  \"orderId\" text NOT NULL,\n  PRIMARY KEY (\"number\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"shirtNumber\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"shirtNumber\""
+        ]
+      }
+    ]
+  },
+  {
+    "id": "table.shirtOrder",
+    "label": "Create table \"shirtOrder\"",
+    "summary": "Creates table \"shirtOrder\"",
+    "operationClass": "additive",
+    "target": {
+      "id": "postgres",
+      "details": {
+        "schema": "public",
+        "objectType": "table",
+        "name": "shirtOrder"
+      }
+    },
+    "precheck": [
+      {
+        "description": "ensure table \"shirtOrder\" does not exist",
+        "sql": "SELECT (to_regclass($1)) IS NULL AS \"result\"",
+        "params": [
+          "\"public\".\"shirtOrder\""
+        ]
+      }
+    ],
+    "execute": [
+      {
+        "description": "create table \"shirtOrder\"",
+        "sql": "CREATE TABLE \"public\".\"shirtOrder\" (\n  \"createdAt\" timestamptz DEFAULT (now()) NOT NULL,\n  \"customer\" text NOT NULL,\n  \"email\" text NOT NULL,\n  \"id\" text NOT NULL,\n  \"items\" text NOT NULL,\n  \"method\" text NOT NULL,\n  \"paymentId\" text,\n  \"phone\" text NOT NULL,\n  \"status\" text NOT NULL,\n  \"total\" int4 NOT NULL,\n  PRIMARY KEY (\"id\")\n)",
+        "params": []
+      }
+    ],
+    "postcheck": [
+      {
+        "description": "verify table \"shirtOrder\" exists",
+        "sql": "SELECT (to_regclass($1)) IS NOT NULL AS \"result\"",
+        "params": [
+          "\"public\".\"shirtOrder\""
+        ]
+      }
+    ]
+  }
+]

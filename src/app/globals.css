@@ -1,122 +1,1054 @@
-:root {
-  color-scheme: light;
-}
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap");
+/* Tailwind sem o preflight (reset de base), pra não alterar o CSS que já existe no site. */
+@import "tailwindcss/theme" layer(theme);
+@import "tailwindcss/utilities" layer(utilities);
 
+:root {
+  --blue: #1859e8;
+  --ink: #14171c;
+  --line: #e4e6e9;
+  --paper: #fafaf8;
+  color-scheme: light;
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+}
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
 * {
   box-sizing: border-box;
 }
-
+html {
+  scroll-behavior: smooth;
+}
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-  background: #fff;
-  color: #111;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "DM Sans", Arial, sans-serif;
+  font-size: 14px;
 }
-
-.shell {
-  max-width: 40rem;
-  margin: 0 auto;
-  padding: 3rem 1.5rem;
+button,
+input,
+textarea {
+  font: inherit;
 }
-
-.hero {
-  margin-bottom: 1.5rem;
+button {
+  cursor: pointer;
+  color: inherit;
 }
-
-.eyebrow {
-  margin: 0 0 0.5rem;
-  color: #666;
-  font-size: 0.75rem;
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button:focus-visible,
+a:focus-visible,
+summary:focus-visible {
+  outline: 3px solid #5288ff;
+  outline-offset: 4px;
+}
+input:focus,
+textarea:focus {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+.announcement {
+  background: #111923;
+  color: #fff;
+  text-align: center;
+  padding: 11px 20px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+.announcement span {
+  margin-left: 28px;
+  color: #bdc5d4;
+  letter-spacing: 0.2px;
+  font-weight: 400;
+}
+.header {
+  max-width: 1400px;
+  margin: auto;
+  height: 100px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 64px;
+  border-bottom: 1px solid var(--line);
+}
+.header .brand {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: center;
+}
+.header nav {
+  grid-column: 1;
+  grid-row: 1;
+}
+.header .bag {
+  grid-column: 3;
+  grid-row: 1;
+  justify-self: end;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  line-height: 1;
+}
+.brand-mark {
+  position: relative;
+  overflow: hidden;
+  background: var(--blue);
+  color: white;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  padding: 6px;
+  flex-shrink: 0;
+}
+.brand-mark img {
+  /* Compensa as margens transparentes do PNG, centralizando o símbolo visível. */
+  position: absolute;
+  left: 50%;
+  top: 55%;
+  width: 155%;
+  height: 155%;
+  max-width: none;
+  display: block;
+  transform: translate(-50%, -50%);
+  object-fit: contain;
+}
+.brand-name {
+  font-size: 14px;
+  letter-spacing: 1.2px;
+  line-height: 1.35;
+  font-weight: 700;
+}
+.brand small {
+  display: block;
+  font-size: 8px;
+  letter-spacing: 1.4px;
+  margin-top: 7px;
+}
+.header nav {
+  display: flex;
+  gap: 32px;
+  font-size: 12px;
+  color: #5a6069;
+}
+.header nav a:hover {
+  color: var(--blue);
+}
+.bag {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: none;
+  border: 0;
+  font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
 }
-
-h1 {
+.bag span {
+  border-radius: 50%;
+  background: #eceef0;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+}
+main {
+  max-width: 1400px;
+  margin: auto;
+}
+.product {
+  display: grid;
+  grid-template-columns: 1.17fr 1fr;
+  gap: 68px;
+  padding: 46px 64px 70px;
+}
+.gallery {
+  background: #e9edf0;
+  border: 1px solid #e2e6e9;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  align-self: start;
+  overflow: hidden;
+}
+.gallery-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px 25px 0;
+  position: relative;
+  z-index: 1;
+}
+.pill {
+  background: #fff9;
+  border: 1px solid #fff;
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  padding: 8px 11px;
+  font-weight: 700;
+  border-radius: 2px;
+}
+.edition {
+  font-size: 9px;
+  color: #6b7783;
+  letter-spacing: 2px;
+}
+.shirt-stage {
+  position: relative;
+  height: 535px;
+  background: radial-gradient(ellipse at 50% 50%, #fff9, transparent 66%);
+}
+.stage-type {
+  position: absolute;
+  top: 32px;
+  left: 29px;
+  font:
+    800 clamp(60px, 7.4vw, 104px)/0.86 "Barlow Condensed",
+    Impact,
+    sans-serif;
+  letter-spacing: -2px;
+  color: #dae0e6;
+  transform: rotate(-5deg);
+}
+.shirt-viewer {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+.shirt-viewer model-viewer {
+  width: 100%;
+  height: 100%;
+  --poster-color: transparent;
+}
+.gallery-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 25px 20px;
+  gap: 10px;
+}
+.gallery-bottom > span {
+  font-size: 9px;
+  color: #65717f;
+}
+.illustration {
   margin: 0;
-  font-size: 1.25rem;
+  padding: 13px 20px;
+  text-align: center;
+  border-top: 1px solid #dce0e3;
+  font-size: 9px;
+  color: #77818b;
+}
+.product-info {
+  padding: 10px 0;
+}
+.eyebrow {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.7px;
+  color: #70767e;
+}
+.blue {
+  color: var(--blue);
+}
+h1 {
+  font:
+    800 clamp(68px, 6.4vw, 90px)/0.88 "Barlow Condensed",
+    Impact,
+    sans-serif;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  margin: 21px 0;
+}
+h1 em {
+  font-style: normal;
+  color: var(--blue);
+}
+.description {
+  color: #777c83;
+  font-size: 12px;
+  line-height: 1.8;
+}
+.price-row {
+  display: flex;
+  gap: 13px;
+  align-items: center;
+  margin: 21px 0;
+}
+.price-row strong {
+  font-size: 24px;
+  letter-spacing: -1px;
+}
+.price-row > span {
+  font-size: 10px;
+  color: #777;
+}
+.divider {
+  height: 1px;
+  background: var(--line);
+  margin: 24px 0;
+}
+fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0 0 23px;
+  min-width: 0;
+}
+legend {
+  font-size: 11px;
   font-weight: 600;
+  margin-bottom: 11px;
+}
+legend b {
+  color: #88909a;
+  font-size: 9px;
+  margin-right: 10px;
+}
+.options {
+  display: flex;
+  gap: 9px;
+}
+.options button {
+  background: transparent;
+  border: 1px solid #d8dce2;
+  border-radius: 4px;
+  padding: 13px;
+  font-size: 11px;
+  transition: background 0.15s;
+}
+.options button:hover {
+  border-color: var(--blue);
+}
+.options .active {
+  background: #eaf0ff;
+  border-color: var(--blue);
+  color: var(--blue);
+  font-weight: 700;
+}
+.sleeves button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.radio {
+  margin-left: auto;
+  border: 1px solid #bfc5cf;
+  border-radius: 50%;
+  width: 11px;
+  height: 11px;
+}
+.active .radio {
+  border: 3px solid var(--blue);
+  background: white;
+}
+.sizes button {
+  width: 49px;
+  height: 43px;
+}
+.personalize {
+  display: grid;
+  grid-template-columns: 1fr 100px;
+  gap: 14px;
+}
+label {
+  display: block;
+  font-size: 10px;
+  font-weight: 500;
+}
+input,
+textarea {
+  width: 100%;
+  display: block;
+  border: 1px solid #d9dee4;
+  border-radius: 4px;
+  padding: 13px;
+  background: transparent;
+  margin-top: 7px;
+  color: #252a32;
+}
+input::placeholder {
+  color: #a3a9b2;
+  font-size: 11px;
+}
+label small {
+  display: block;
+  color: #9399a1;
+  font-size: 9px;
+  margin-top: 7px;
+}
+.invalid {
+  color: #c13b3b !important;
+}
+.reserved {
+  margin-top: 12px;
+  color: #727a86;
+  font-size: 10px;
+}
+.reserved summary {
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
+}
+.reserved > div {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding-top: 12px;
+}
+.reserved > div span {
+  border-radius: 3px;
+  background: #e9ebef;
+  padding: 5px 8px;
+  text-decoration: line-through;
+}
+.reserved p {
+  line-height: 1.5;
+}
+.primary {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  background: var(--blue);
+  border: 0;
+  border-radius: 4px;
+  padding: 17px;
+  color: white;
+  font-weight: 600;
+  font-size: 12px;
+}
+.primary:hover {
+  background: #104bcc;
+}
+.primary > span {
+  margin-left: auto;
+  font-size: 20px;
+}
+.add {
+  justify-content: space-between;
+  padding: 17px 20px;
+}
+.product-perks {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  font-size: 9px;
+  color: #7c828b;
+  margin-top: 16px;
+}
+.manifesto {
+  background: #101b2b;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 38px 64px;
+  gap: 28px;
+  position: relative;
+  overflow: hidden;
+}
+.manifesto:after {
+  content: "";
+  width: 280px;
+  height: 200px;
+  position: absolute;
+  right: 5%;
+  top: -60px;
+  border: 32px solid #1b3652;
+  transform: rotate(-35deg);
+  opacity: 0.5;
+}
+.cross {
+  font-size: 44px;
+  color: #a3b6d4;
+}
+.manifesto p {
+  font-size: 22px;
+  line-height: 1.4;
+  font-weight: 400;
+  margin: 0;
+  letter-spacing: -0.6px;
+}
+.manifesto strong {
+  color: #8098c3;
+  font-weight: 400;
+}
+.manifesto-note {
+  margin-left: auto;
+  color: #91a0b6;
+  letter-spacing: 2px;
+  font-size: 9px;
+  line-height: 1.8;
+  z-index: 1;
+}
+.steps {
+  padding: 65px 64px;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr 1fr;
+  gap: 36px;
+  border-bottom: 1px solid var(--line);
+}
+h2 {
+  font-size: 26px;
+  letter-spacing: -1px;
+  line-height: 1.2;
+}
+.steps h2 {
+  margin: 16px 0 0;
+}
+.steps article > span {
+  font-size: 12px;
+  color: var(--blue);
+  font-weight: 600;
+}
+.steps h3 {
+  font-size: 12px;
+  margin: 22px 0 9px;
+}
+.steps p {
+  font-size: 11px;
+  line-height: 1.8;
+  color: #7a818b;
+}
+.steps .eyebrow {
+  font-size: 8px;
   line-height: 1.4;
 }
-
-.lede {
-  margin: 0.5rem 0 0;
-  color: #666;
-  font-size: 0.875rem;
-  line-height: 1.6;
-}
-
-.panel {
-  border: 1px solid #e5e5e5;
-  border-radius: 0.5rem;
-  padding: 1rem;
-}
-
-.panelHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 0.75rem;
-}
-
-h2 {
-  margin: 0;
-  font-size: 0.875rem;
-  font-weight: 600;
-}
-
-.panelHeader span,
-.empty,
-time {
-  color: #888;
-  font-size: 0.8rem;
-}
-
-.panel p {
-  color: #666;
-  font-size: 0.8rem;
-}
-
-.users {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.faq {
+  padding: 60px 64px 75px;
   display: grid;
-  gap: 0.5rem;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 60px;
 }
-
-.users li {
+.faq h2 {
+  font-size: 23px;
+  margin-top: 13px;
+}
+.faq details {
+  border-bottom: 1px solid var(--line);
+  padding: 19px 0;
+}
+.faq summary {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  font-size: 12px;
+}
+.faq summary span {
+  font-size: 16px;
+  color: #77808d;
+}
+.faq p {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #747c86;
+  max-width: 520px;
+}
+footer {
+  max-width: 1400px;
+  margin: auto;
+  padding: 30px 64px;
+  border-top: 1px solid var(--line);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  padding: 0.625rem 0.75rem;
-  border: 1px solid #eee;
-  border-radius: 0.375rem;
+  gap: 25px;
+  color: #777e87;
+  font-size: 10px;
 }
-
-.users p {
-  margin: 0.125rem 0 0;
+footer .brand {
+  color: #373e48;
+  font-size: 24px;
 }
-
-time {
-  font-size: 0.75rem;
-  white-space: nowrap;
+footer .brand small {
+  font-size: 7px;
+  letter-spacing: 1px;
+  max-width: 85px;
+  line-height: 1.5;
 }
-
-code {
-  padding: 0.125rem 0.25rem;
-  border-radius: 0.25rem;
-  background: #f5f5f5;
-  font-family: SFMono-Regular, Consolas, monospace;
-  font-size: 0.875em;
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: #0a142776;
+  backdrop-filter: blur(4px);
+  z-index: 20;
+  display: flex;
+  justify-content: flex-end;
 }
-
-@media (max-width: 640px) {
-  .users li,
-  .panelHeader {
+.drawer {
+  background: var(--paper);
+  width: 510px;
+  max-width: 100%;
+  padding: 30px;
+  overflow: auto;
+  box-shadow: -10px 0 60px #0002;
+}
+.drawer-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 20px;
+}
+.drawer-heading h2 {
+  font-size: 23px;
+  margin: 9px 0 0;
+}
+.drawer-heading h2 span {
+  color: #858d99;
+}
+.drawer-heading button,
+.cart-item > button {
+  border: 0;
+  background: transparent;
+  padding: 12px;
+}
+.notice {
+  padding: 12px;
+  background: #eaf0fc;
+  color: #38568a;
+  font-size: 11px;
+  line-height: 1.6;
+  border-radius: 4px;
+}
+.error {
+  padding: 12px;
+  background: #fff0ee;
+  color: #ae3530;
+  font-size: 12px;
+  line-height: 1.6;
+  border-radius: 4px;
+}
+.cart-item {
+  display: flex;
+  gap: 17px;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+}
+.cart-shirt {
+  width: 85px;
+  background: #e5eaf0;
+  border-radius: 5px;
+}
+.cart-item > div:nth-child(2) {
+  flex: 1;
+  font-size: 12px;
+}
+.cart-item strong span {
+  color: var(--blue);
+}
+.cart-item p {
+  font-size: 10px;
+  color: #747e8c;
+}
+.cart-item b {
+  font-size: 11px;
+}
+.payment-method {
+  padding: 20px 0;
+}
+.payment-method h3,
+.customer h3 {
+  font-size: 13px;
+}
+.payment-method .options button {
+  flex: 1;
+}
+.totals {
+  padding: 5px 0 20px;
+}
+.totals p {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #717b8a;
+}
+.totals .grand-total {
+  font-size: 21px;
+  color: var(--ink);
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+  margin-top: 20px;
+}
+.customer label {
+  margin-bottom: 16px;
+}
+.muted,
+.secure {
+  font-size: 10px;
+  line-height: 1.6;
+  color: #8a919c;
+}
+.secure {
+  text-align: center;
+  margin-top: 18px;
+}
+.empty-cart {
+  text-align: center;
+  padding: 60px 0;
+}
+.empty-cart > span {
+  font-size: 50px;
+  color: var(--blue);
+}
+.empty-cart p {
+  color: #79818d;
+  margin-bottom: 30px;
+}
+.payment-result {
+  padding: 25px 0;
+  display: grid;
+  gap: 15px;
+}
+.payment-result h2,
+.payment-result p {
+  margin: 0;
+}
+.payment-result p {
+  color: #747d8b;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.payment-result small {
+  font-size: 10px;
+  overflow-wrap: anywhere;
+}
+.payment-result img {
+  width: 220px;
+  max-width: 100%;
+  margin: auto;
+}
+.result-icon {
+  font-size: 40px;
+  color: var(--blue);
+}
+.secondary {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #cdd5e0;
+  background: transparent;
+  border-radius: 4px;
+}
+.dash {
+  max-width: 1000px;
+  padding: 45px 25px;
+  margin: 0 auto;
+}
+.dash form {
+  display: grid;
+  gap: 20px;
+  background: white;
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+}
+.dash h1 {
+  font-size: 52px;
+}
+.dash p {
+  line-height: 1.7;
+  color: #777;
+}
+.dash label {
+  font-size: 12px;
+}
+.dash-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+.dash-orders {
+  margin-top: 40px;
+}
+.dash-orders h2 {
+  font-size: 22px;
+  margin-bottom: 16px;
+}
+.dash-orders-row {
+  cursor: pointer;
+}
+.dash-order-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 20px;
+  margin: 16px 0 20px;
+  font-size: 13px;
+}
+@media (max-width: 600px) {
+  .dash-order-details {
+    grid-template-columns: 1fr;
+  }
+}
+@media (min-width: 1400px) {
+  .shirt-stage {
+    height: 585px;
+  }
+}
+@media (max-width: 1050px) {
+  .header {
+    padding: 0 30px;
+  }
+  .product {
+    padding: 30px;
+    gap: 32px;
+  }
+  .shirt-stage {
+    height: 450px;
+  }
+  .gallery-bottom {
     flex-direction: column;
     align-items: flex-start;
+  }
+  .manifesto {
+    padding: 35px 30px;
+  }
+  .steps {
+    padding: 45px 30px;
+    gap: 20px;
+  }
+  .faq {
+    padding: 45px 30px;
+    gap: 30px;
+  }
+  footer {
+    padding: 25px 30px;
+  }
+  .price-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .product-perks {
+    gap: 12px;
+    font-size: 8px;
+  }
+  .gallery-top {
+    padding: 20px 15px 0;
+  }
+  .edition {
+    display: none;
+  }
+}
+@media (max-width: 700px) {
+  .announcement {
+    font-size: 8px;
+    letter-spacing: 1.4px;
+  }
+  .announcement span {
+    display: none;
+  }
+  .header {
+    height: auto;
+    min-height: 100px;
+    padding: 12px 20px;
+    grid-template-columns: 1fr;
+    row-gap: 8px;
+  }
+  .header nav {
+    display: none;
+  }
+  .brand {
+    font-size: 25px;
+  }
+  .brand-mark {
+    width: 46px;
+    height: 46px;
+    padding: 4px;
+  }
+  .header .brand {
+    grid-column: 1;
+    gap: 9px;
+  }
+  .header .bag {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .brand-name {
+    font-size: 11px;
+    letter-spacing: 0.7px;
+  }
+  .product {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 25px;
+  }
+  .gallery {
+    width: 100%;
+  }
+  .shirt-stage {
+    height: 430px;
+  }
+  .stage-type {
+    font-size: 85px;
+    top: 15px;
+  }
+  .gallery-bottom {
+    flex-direction: row;
+    align-items: center;
+    margin: 0 20px 18px;
+  }
+  .gallery-top {
+    padding: 18px 20px 0;
+  }
+  .edition {
+    display: block;
+  }
+  .illustration {
+    font-size: 8px;
+  }
+  .product-info {
+    padding: 0 3px 20px;
+  }
+  h1 {
+    font-size: 78px;
+  }
+  .description {
+    font-size: 12px;
+  }
+  .price-row {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
+  .price-row > span {
+    font-size: 9px;
+  }
+  .options button {
+    font-size: 12px;
+    padding: 15px;
+  }
+  .sizes button {
+    width: 55px;
+    height: 48px;
+  }
+  legend {
+    font-size: 12px;
+  }
+  label {
+    font-size: 11px;
+  }
+  input {
+    font-size: 16px;
+  }
+  .product-perks {
+    font-size: 9px;
+    justify-content: space-between;
+  }
+  .manifesto {
+    padding: 30px 23px;
+    gap: 19px;
+  }
+  .manifesto p {
+    font-size: 20px;
+  }
+  .manifesto-note {
+    display: none;
+  }
+  .steps {
+    padding: 40px 24px;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+  .steps h2 {
+    font-size: 26px;
+  }
+  .steps article h3 {
+    margin-top: 17px;
+  }
+  .faq {
+    display: block;
+    padding: 28px 24px 45px;
+  }
+  .faq h2 {
+    margin-bottom: 18px;
+  }
+  footer {
+    flex-wrap: wrap;
+    padding: 25px 24px;
+    gap: 20px;
+  }
+  footer > span {
+    display: none;
+  }
+  .drawer {
+    padding: 24px 20px;
+  }
+  .drawer-heading h2 {
+    font-size: 21px;
+  }
+}
+@media (max-width: 380px) {
+  .shirt-stage {
+    height: 340px;
+  }
+  .gallery-bottom > span {
+    font-size: 8px;
+  }
+  h1 {
+    font-size: 66px;
+  }
+  .stage-type {
+    font-size: 70px;
+  }
+  .steps {
+    grid-template-columns: 1fr;
   }
 }
