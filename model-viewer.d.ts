@@ -26,7 +26,7 @@ type ModelViewerAttributes = DetailedHTMLProps<
   reveal?: "auto" | "interaction" | "manual";
 };
 
-declare global {
+declare module "react" {
   namespace JSX {
     interface IntrinsicElements {
       "model-viewer": ModelViewerAttributes;
